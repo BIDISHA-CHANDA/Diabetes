@@ -1,0 +1,424 @@
+<DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>CO2 EMISSION Detection</title>
+  <style>
+    /*just bg and body style*/
+    body {
+      margin: 40px;
+      background-color: #808080;
+      background-image: linear-gradient(45deg,teal,white);
+    }
+
+    .container {
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .btn-container {
+      background: white;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .head {
+      font-weight: bolder;
+    }
+
+    .btn-primary {
+      border-color: #ff33f !important;
+      color: #ffffff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      background-color: #de5499 !important;
+      border-color: #de5499 !important;
+      padding: 5px;
+    }
+
+    label {
+      width: 50%;
+    }
+
+    #predict {
+      display: none;
+    }
+
+    .form-group {
+      padding: 2px;
+    }
+  </style>
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="head">Diabetes Hospital Readmission </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-container">
+
+          <!-- Main Input For Receiving Query to our ML -->
+          <form action="{{ url_for('predict')}}" method="post" class="form-inline">
+            <div class="row">
+              <div class="col-md-6">
+                <img class="image" src="a.jpg" width="100%" height="100%" />
+              </div>
+              <div class="col-md-6">
+                <div class="container">
+                  <h4>Enter the Details</h4>
+                  <div class="form-group">
+                    <label for="encounter_id">Encounter_id</label> 
+                    <input type="text" class="form-control" name="encounter_id" required="required">
+                  </div>
+                  <div class="form-group">
+                    <label for="patient_nbr">Patient_nbr</label>
+                    <input type="text" class="form-control" name="patient_nbr" required="required">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="race">Race</label> 
+                    <select class="form-control" name="race" > 
+                      <option value="0">AfricanAmerican</option> 
+                      <option value="1">Asian</option> 
+                      <option value="2">Caucasian</option> 
+                      <option value="3">Hispanic</option>
+                      <option value="4">Other</option></select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="age">Age</label> 
+                   <select class="form-control" name="age" > 
+                         <option value="0">0-10</option> 
+                         <option value="1">10-20</option> 
+
+                    <option value="2">20-30</option> 
+                    <option value="3">30-40</option>
+                   <option value="4">40-50</option>
+                   <option value="5">50-60</option>
+                   <option value="6">60-70</option>
+                   <option value="7">70-80</option>
+                   <option value="8">80-90</option>
+                   <option value="9">90-100</option></select>
+                  </div>
+                 
+                 <div class="form-group">
+                     <label for="admission_type_id">Admission type id</label> 
+    <select class="form-control" name="admission_type_id" > 
+      <option value="0">1</option> 
+      <option value="1">2</option> 
+<option value="2">3</option> 
+<option value="3">4</option>
+<option value="4">5</option>
+<option value="5">6</option>
+<option value="6">7</option>
+<option value="7">8</option></select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="discharge_disposition_id">Discharge_disposition_id</label> 
+                   <select class="form-control" name="discharge_disposition_id" > 
+                     <option value="0">1</option> 
+                     <option value="11">2</option> 
+                     <option value="19">3</option> 
+                     <option value="20">4</option>
+                     <option value="21">5</option>
+                     <option value="22">6</option>
+                    <option value="23">7</option>
+                    <option value="24">8</option></select>
+                  </div>
+                   <div class="form-group">
+                    <label for="admission_source_id">Admission_source_id</label> 
+                   <select class="form-control" name="admission_source_id" > 
+                     <option value="0">1</option> 
+                     <option value="6">2</option> 
+                     <option value="10">3</option> 
+                     <option value="11">4</option>
+                     <option value="12">5</option>
+                     <option value="13">6</option>
+                    <option value="14">7</option>
+                    <option value="15">8</option></select>
+                  </div>
+                 <div class="form-group">
+                   <label for="time_in_hospital">Time_in_hospital</label>
+                    <input type="text" class="form-control" name="time_in_hospital" required="required">
+                  </div>
+                  <div class="form-group">
+                     <label for="num_lab_procedures">Num_lab_procedures</label>
+                    <input type="text" class="form-control" name="num_lab_procedures" required="required">
+                  </div>
+                   <div class="form-group">
+                     <label for="num_procedures">Num_procedures</label>
+                    <input type="text" class="form-control" name="num_procedures" required="required">
+                  </div>
+                  <div class="form-group">
+                     <label for="num_medications ">Num_medications </label>
+                    <input type="text" class="form-control" name="num_medications " required="required">
+                  </div>
+                   <div class="form-group">
+                     <label for="number_diagnoses ">Number_diagnoses</label>
+                    <input type="text" class="form-control" name="number_diagnoses " required="required">
+                  </div>
+                   <div class="form-group">
+                    <label for="max_glu_serum">max_glu_serum</label> 
+                   <select class="form-control" name="max_glu_serum" > 
+                     <option value="0">>200</option> 
+                     <option value="1">>300</option> 
+                     <option value="2">None</option> 
+                     <option value="3">Norm</option></select>
+                     
+                  </div>
+                   <div class="form-group">
+                    <label for="A1Cresult">A1Cresult</label> 
+                   <select class="form-control" name="A1Cresult" > 
+                     <option value="0">>200</option> 
+                     <option value="1">>300</option> 
+                     <option value="2">None</option> 
+                     <option value="3">Norm</option></select>
+                     
+                  </div>
+                   
+                   <div class="form-group">
+                    <label for="metformin">Metformin</label> 
+                   <select class="form-control" name="metformin"> 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   <div class="form-group">
+                    <label for="repaglinide">Repaglinide</label> 
+                   <select class="form-control" name="repaglinide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   
+                   <div class="form-group">
+                    <label for="nateglinide">Nateglinide</label> 
+                   <select class="form-control" name="nateglinide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                  
+                   <div class="form-group">
+                    <label for="repaglinide">Repaglinide</label> 
+                   <select class="form-control" name="repaglinide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                    
+                   <div class="form-group">
+                    <label for="chlorpropamide">chlorpropamide</label> 
+                   <select class="form-control" name="chlorpropamide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  
+                   </div>
+                   <div class="form-group">
+                    <label for="glimepiride">Glimepiride</label> 
+                   <select class="form-control" name="glimepiride" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  
+                  </div>
+                   <div class="form-group">
+                    <label for="acetohexamide">Acetohexamide</label> 
+                   <select class="form-control" name="acetohexamide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+
+                   <div class="form-group">
+                    <label for="glipizide">Glipizide</label> 
+                   <select class="form-control" name="glipizide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   <div class="form-group">
+                    <label for="glyburide">Glyburide</label> 
+                   <select class="form-control" name="glyburide" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                  <div class="form-group">
+                    <label for="tolbutamide'">Tolbutamide'</label> 
+                   <select class="form-control" name="tolbutamide'" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   
+                  <div class="form-group">
+                    <label for="pioglitazone">Pioglitazone</label> 
+                   <select class="form-control" name="pioglitazone'" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                    <div class="form-group">
+                    <label for="rosiglitazone">Rosiglitazone</label> 
+                   <select class="form-control" name="rosiglitazone" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+
+                    <div class="form-group">
+                    <label for="acarbose">Acarbose</label> 
+                   <select class="form-control" name="acarbose" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                     <div class="form-group">
+                    <label for="miglitol">Miglitol</label> 
+                   <select class="form-control" name="miglitol" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   <div class="form-group">
+                    <label for="troglitazone">Troglitazone</label> 
+                   <select class="form-control" name="troglitazone" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                   <div class="form-group">
+                    <label for="tolazamid">tolazamid</label> 
+                   <select class="form-control" name="tolazamid" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>  
+                    <div class="form-group">
+                    <label for="insulin">insulin</label> 
+                   <select class="form-control" name="insulin" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>      
+                   <div class="form-group">
+                    <label for="glyburide-metformin">glyburide-metformin</label> 
+                   <select class="form-control" name="glyburide-metformin" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>
+                    <div class="form-group">
+                    <label for="glipizide-metformin">glipizide-metformin</label> 
+                   <select class="form-control" name="glipizide-metformin" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>  
+                     <div class="form-group">
+                    <label for="metformin-rosiglitazone">metformin-rosiglitazone</label> 
+                   <select class="form-control" name="metformin-rosiglitazone" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>      
+                    <div class="form-group">
+                    <label for="metformin-pioglitazone">metformin-pioglitazone</label> 
+                   <select class="form-control" name="metformin-pioglitazone" > 
+                     <option value="0">Down</option> 
+                     <option value="1">No</option> 
+                     <option value="2">Steady</option> 
+                     <option value="3">Up</option></select>
+                     
+                  </div>      
+                      <div class="form-group">
+                    <label for="change">Change</label> 
+                   <select class="form-control" name="change"> 
+                     <option value="0">YES</option> 
+                     <option value="1">NO</option> 
+                     
+                     </select>
+                  </div>      
+                     <div class="form-group">
+                    <label for="diabetesMed">diabetesMed</label> 
+                   <select class="form-control" name="diabetesMed" > 
+                     <option value="0">NO</option> 
+                     <option value="1">YES</option> 
+</select>
+                   </div>                                        
+                  
+
+                  </br>
+                  <button type="submit" class="btn btn-primary btn-lg">Predict diabetes</button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        <br />
+        <center>
+          <h1 style="background:#de5499">{{prediction_text}}</h1>
+        </center>
+        <br />
+</body>
+
+</html>
