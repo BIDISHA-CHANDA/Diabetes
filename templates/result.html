@@ -1,6 +1,295 @@
-
-<html>
+<!DOCTYPE html> 
+<html lang="en"> 
 <head>
-</head>
-<body> <div><h1> {{ prediction }}</h1> </div></body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<script src="js/lightbox-plus-jquery.min.js"></script>
+</head> 
+<style>
+@import "https://fonts.googleapis.com/css?family=Lato:400,700";
+
+.header{
+position:fixed;
+background:linear-gradient(48deg, green, lightblue);
+display:flex;
+flex-direction:row;
+width:100%;
+height:18%;
+margin:10px;
+z-index:1;
+}
+.header > ul {
+display:flex;
+justify-content:flex-end;
+}
+.header > ul > li {
+padding:20px;
+}
+.header > span {
+  margin-top: 5px;
+  display:flex;
+  justify-content: flex-end;
+  font-size: 0.9em;
+  color: #444;
+}
+#header-img{
+width:200px;
+height:100px;
+padding-left:10px;
+}
+.main{
+background:linear-gradient(45deg,teal,white);
+}
+.container {
+  position: relative;
+ 
+  max-width: 100%;
+  padding-top:120px;
+}
+h4{text-align:center;}
+.three{
+background:linear-gradient(48deg,lightblue,pink);
+border-radius:15px;
+}
+.three > p{
+text-align:center;
+font-size:50px;
+}
+.three > a{
+color:blue;
+text-align:center;
+}
+
+.two{
+background:linear-gradient(45deg, lightblue, red);
+border-radius:0 0 60% 60%/0 0 90% 90%;
+text-align:center;
+
+}
+
+
+.level{
+font-size:20px;
+color:brown;
+}
+.about{
+font-size:15px;
+color:black;
+text-align:center;
+font-style:italics;
+}
+.product {
+  display: flex;
+flex-direction:column;
+  align-items: center;
+  text-align: center;
+  width: calc(100%  / 3);
+  margin: 10px;
+  border: 1px solid #000;
+
+background:linear-gradient(48deg, purple, pink);
+border-radius:15px 50px;
+
+}
+@media (max-width: 800px) {
+ 
+  .product {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+}
+
+.container img {vertical-center: middle;}
+
+.container .content {
+  position: absolute;
+  bottom: 20px;
+right:2px;
+ 
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: pink;
+  width: 100%;
+  padding-top: 20px;
+padding-left: 20px;
+padding-bottom: 20px;
+padding-right: 30px;
+align-items:right;
+}
+.container img{
+width:500px;
+height:800px;
+}
+
+#pricing {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+}
+
+.one{
+padding-left:20px;
+padding-right:20px;
+}
+.lb-loader,.lightbox{text-align:center;line-height:0;position:absolute;left:0}body.lb-disable-scrolling{overflow:hidden}.lightboxOverlay{position:absolute;top:0;left:0;z-index:9999;background-color:#000;filter:alpha(Opacity=80);opacity:.8;display:none}.lightbox{width:100%;z-index:10000;font-weight:400;outline:0}.lightbox .lb-image{display:block;height:auto;max-width:inherit;max-height:none;border-radius:3px;border:4px solid #fff}.lightbox a img{border:none}.lb-outerContainer{position:relative;width:250px;height:250px;margin:0 auto;border-radius:4px;background-color:#fff}.lb-outerContainer:after{content:"";display:table;clear:both}.lb-loader{top:43%;height:25%;width:100%}.lb-cancel{display:block;width:32px;height:32px;margin:0 auto;background:url(../images/loading.gif) no-repeat}.lb-nav{position:absolute;top:0;left:0;height:100%;width:100%;z-index:10}.lb-container>.nav{left:0}.lb-nav a{outline:0;background-image:url(data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==)}.lb-next,.lb-prev{height:100%;cursor:pointer;display:block}.lb-nav a.lb-prev{width:34%;left:0;float:left;background:url(../images/prev.png) left 48% no-repeat;filter:alpha(Opacity=0);opacity:0;-webkit-transition:opacity .6s;-moz-transition:opacity .6s;-o-transition:opacity .6s;transition:opacity .6s}.lb-nav a.lb-prev:hover{filter:alpha(Opacity=100);opacity:1}.lb-nav a.lb-next{width:64%;right:0;float:right;background:url(../images/next.png) right 48% no-repeat;filter:alpha(Opacity=0);opacity:0;-webkit-transition:opacity .6s;-moz-transition:opacity .6s;-o-transition:opacity .6s;transition:opacity .6s}.lb-nav a.lb-next:hover{filter:alpha(Opacity=100);opacity:1}.lb-dataContainer{margin:0 auto;padding-top:5px;width:100%;border-bottom-left-radius:4px;border-bottom-right-radius:4px}.lb-dataContainer:after{content:"";display:table;clear:both}.lb-data{padding:0 4px;color:#ccc}.lb-data .lb-details{width:85%;float:left;text-align:left;line-height:1.1em}.lb-data .lb-caption{font-size:13px;font-weight:700;line-height:1em}.lb-data .lb-caption a{color:#4ae}.lb-data .lb-number{display:block;clear:left;padding-bottom:1em;font-size:12px;color:#999}.lb-data .lb-close{display:block;float:right;width:30px;height:30px;background:url(../images/close.png) top right no-repeat;text-align:right;outline:0;filter:alpha(Opacity=70);opacity:.7;-webkit-transition:opacity .2s;-moz-transition:opacity .2s;-o-transition:opacity .2s;transition:opacity .2s}.lb-data .lb-close:hover{cursor:pointer;filter:alpha(Opacity=100);opacity:1}
+
+footer {
+  margin-top: 30px;
+  background-color: lightblue;
+  padding: 20px;
+}
+li{
+font-size:23px;
+
+}
+
+footer > ul {
+  display: flex;
+  justify-content:flex-end;
+}
+
+footer > ul > li {
+  padding: 12px;
+}
+
+footer > span {
+  margin-top: 5px;
+  display:flex;
+  justify-content: flex-end;
+  font-size: 0.9em;
+  color: #444;
+}
+h1{
+text-align:center;
+}
+</style>
+
+<body>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+  crossorigin="anonymous"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
+  rel="stylesheet"
+/>
+<div class="main">
+ <header class="header">
+    <div class="logo">
+      <img
+        id="header-img"
+        src="t.jpg"
+        alt="original trombones logo"
+      />
+
+    </div>
+ <h1><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDIABETES PREDICTOR</strong><h1>
+  </header>
+<div class="container">
+<img src="a.jpg" alt="Notebook" style="width:100%;">
+<div class="content">
+<form action="/action_page.php">
+<h1>Find your diabetes prediction</h1>
+<h1> {{ prediction }}</h1> 
+
+</div>
+</div>
+<div class="one">
+<h1><b>What is diabetes</b></h1>
+<ul>
+<li>Diabetes is a chronic disease that occurs when the pancreas is no longer able to make insulin, or when the body cannot make good use of the insulin it produces. </li>
+<BR>
+<li>Insulin is a hormone made by the pancreas, that acts like a key to let glucose from the food we eat pass from the blood stream into the cells in the body to produce energy. All carbohydrate foods are broken down into glucose in the blood. Insulin helps glucose get into the cells.</li>
+<BR>
+<li>Not being able to produce insulin or use it effectively leads to raised glucose levels in the blood (known as hyperglycaemia). Over the long-term high glucose levels are associated with damage to the body and failure of various organs and tissues.</li>
+<BR>
+
+<h1><strong>Diabetes prevention: 5 tips for taking control</strong></h1>
+<ol>
+<li><strong>Get more physical activity.</strong> There are many benefits to regular physical activity. Exercise can help you:
+
+    Lose weight
+    Lower your blood sugar
+    Boost your sensitivity to insulin — which helps keep your blood sugar within a normal range
+
+Research shows that aerobic exercise and resistance training can help control diabetes. The greatest benefit comes from a fitness program that includes both.</li>
+<br>
+<li><strong>Get plenty of fiber</strong>Fiber may help you:
+
+    Reduce your risk of diabetes by improving your blood sugar control
+    Lower your risk of heart disease
+    Promote weight loss by helping you feel full
+
+Foods high in fiber include fruits, vegetables, beans, whole grains and nuts.</li><br>
+<li><strong>Go for whole grains</strong>It's not clear why, but whole grains may reduce your risk of diabetes and help maintain blood sugar levels. Try to make at least half your grains whole grains.
+<br>
+Many foods made from whole grains come ready to eat, including various breads, pasta products and cereals. Look for the word "whole" on the package and among the first few items in the ingredient list.</li>
+<li><strong>Lose extra weight</strong>If you're overweight, diabetes prevention may hinge on weight loss. Every pound you lose can improve your health, and you may be surprised by how much. Participants in one large study who lost a modest amount of weight — around 7 percent of initial body weight — and exercised regularly reduced the risk of developing diabetes by almost 60 percent.</li>
+<li><strong>Skip fad diets and just make healthier choices</strong>Low-carb diets, the glycemic index diet or other fad diets may help you lose weight at first. But their effectiveness at preventing diabetes and their long-term effects aren't known. And by excluding or strictly limiting a particular food group, you may be giving up essential nutrients and often craving such foods. Instead, make variety and portion control part of your healthy-eating plan.</li>
+
+<BR>
+
+<br>
+
+
+
+
+
+</div>
+</div>
+<div class="two">
+
+<p>To know more about diabetes symptoms,cause prevention measures click the link below</p>
+<a href="https://www.healthline.com/health/diabetes"><strong>Click here</strong></a>
+
+</div>
+<div class="three">
+
+<p><strong><i>KNOW ABOUT ITS TYPES<i><br><strong></p>
+<h4>There are three main types of diabetes – type 1, type 2 and gestational.</h4>
+
+<section id="pricing">
+      <div class="product">
+        <div class="level"><strong>Diabetes Type 1</strong></div>
+      
+<div class="about"> <img src="b.jpg"alt="happy"width="100%"height="400px"></img>Type 1 diabetes, once known as juvenile diabetes or insulin-dependent diabetes, is a chronic condition in which the pancreas produces little or no insulin. Insulin is a hormone needed to allow sugar (glucose) to enter cells to produce energy. your immune system destroys insulin-making cells in your pancreas. These are called beta cells. The condition is usually diagnosed in children and young people, so it used to be called juvenile diabetes.</p></div>
+       
+      </div>
+      <div class="product">
+        <div class="level"><strong>Diabetes Type 2</strong></div>
+              
+<div class="about"><img src="c.jpg"alt="happy"width="100%"height="400px"></img>Type 2 diabetes is a lifelong disease that keeps your body from using insulin the way it should. People with type 2 diabetes are said to have insulin resistance.
+
+People who are middle-aged or older are most likely to get this kind of diabetes. It used to be called adult-onset diabetes. But type 2 diabetes also affects kids and teens, mainly because of childhood obesity.</div>
+       
+      </div>
+      <div class="product">
+        <div class="level"><strong>Diabetes Type 3</strong></div>
+
+<div class="about"><img src="d.jpg"alt="happy"width="100%"height="400px"></img> Type 3 diabetes is a title that has been proposed for Alzheimer's disease which results from resistance to insulin in the brain. It is not yet a medical term or a recognised condition, but is a term now used in research looking into the causes of Alzheimer's disease.Type 3 diabetes is a controversial name sometimes used to refer to Alzheimer's disease, a type of progressive dementia. Strong links have been made between two</div>
+       
+      </div>
+   </section>
+</div>
+<footer>
+
+      <ul>
+        <li><a href="#"><strong>Privacy</strong></a></li>
+        <li><a href="#"><strong>Terms</strong></a></li>
+        <li><a href="#"><strong>Contact</strong></a></li>
+      </ul>
+      <span><strong>Copyright 2020, Oliver Pet Care</strong></span>
+    </footer>
+</div>
+</body>
 </html>
