@@ -4,15 +4,15 @@ from flask import Flask, request, render_template
 import pickle
 
 app = Flask(__name__)
-model = pickle.load(open('heart_final.pkl', 'rb'))
+model = pickle.load(open('d.pkl', 'rb'))
 @app.route('/')
 def home():
-  return render_template('HEART.html')
+  return render_template('diab.html')
 
 
 def ValuePredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(1, 38)
-    loaded_model = pickle.load(open("diab_final.pkl", "rb"))
+    to_predict = np.array(to_predict_list).reshape(1, 21)
+    loaded_model = pickle.load(open("d.pkl", "rb"))
     result = loaded_model.predict(to_predict)
     return result[0]
 
@@ -25,9 +25,9 @@ def result():
         to_predict_list = list(map(float, to_predict_list))
         result = ValuePredictor(to_predict_list)
         if int(result) == 1:
-            prediction = 'Has chances of heart disease'
+            prediction = 'Diab'
         else:
-            prediction = 'Has a healthy heart'
+            prediction = 'no diab'
         return render_template("result.html", prediction=prediction)
 
 
