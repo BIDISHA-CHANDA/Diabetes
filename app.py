@@ -25,9 +25,9 @@ def result():
         to_predict_list = list(map(float, to_predict_list))
         result = ValuePredictor(to_predict_list)
         if int(result) == 1:
-            prediction = 'Diab'
+            prediction = 'CAUTION!! YOU HAVE SIGNIFICANT CHANCES OF DIABETES AND HOSPITAL READMISSION'
         else:
-            prediction = 'no diab'
+            prediction = 'RELAX! YOU HAVE NO CHANCES OF DIABETES AND HOSPITAL READMISSION'
         return render_template("result.html", prediction=prediction)
 
 
